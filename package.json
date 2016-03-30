@@ -7,28 +7,29 @@
     "url": "https://github.com/every-best/DialectTest.git"
   },
   "scripts": {
-    "start": "node ./bin/www"
-  },
-  "main": "app.js",
-  "scripts": {
     "start": "node server.js",
     "watch": "nodemon server.js",
     "postinstall": "bower install && gulp build"
   },
+  "main": "app.js",
   "babel": {
-    "presets": ["es2015", "react"]
+    "presets": [
+      "es2015",
+      "react"
+    ]
   },
   "dependencies": {
     "alt": "^0.17.8",
     "body-parser": "~1.13.2",
+    "compression": "^1.6.0",
+    "cookie-parser": "^1.4.1",
     "express": "~4.13.1",
+    "jade": "~1.11.0",
+    "mongoose": "^4.2.5",
+    "morgan": "~1.6.1",
     "react": "^0.14.2",
     "react-dom": "^0.14.2",
     "react-router": "^1.0.0",
-    "mongoose": "^4.2.5",
-    "compression": "^1.6.0",
-    "jade": "~1.11.0",
-    "morgan": "~1.6.1",
     "serve-favicon": "~2.3.0",
     "underscore": "^1.8.3"
   },
