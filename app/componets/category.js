@@ -5,7 +5,7 @@ function CategoryItem(props){
                 <h2>{props.name}</h2>
                 <p>{props.desc}</p>
                 <p>
-                    <a class="btn btn-default" href="#" role="button"> 进入比赛 》</a>
+                    <a class="btn btn-default" href="#" role="button">start >></a>
                 </p>
             </div>;
 }
