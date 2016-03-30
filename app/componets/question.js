@@ -17,22 +17,24 @@ function ChooseItem(props,nIndex){
                 {nIndex+1}.{props.text}
             </button>);
 }
-export class Question extends React.Component{
+class Question extends React.Component{
 
     choose(evt){
         //TODO 选择操作
     }
     render(){
-        return (<section class="container">
-                    <div class="progress">
+        return (<section className="container">
+                    <div className="progress">
                         {Progress(props)}
                     </div>
-                    <div class="testContainer">
-                        <h2 class="page-header"> {this.props.title}</h2>
-                        <div class="list-group">
+                    <div className="testContainer">
+                        <h2 className="page-header"> {this.props.title}</h2>
+                        <div className="list-group">
                             {this.props.chooses.map(ChooseItem)}
                         </div>
                     </div>
                 </section>);
     }
 }
+
+export default Question;

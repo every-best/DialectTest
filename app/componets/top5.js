@@ -1,15 +1,16 @@
 import React from "react"
-export class Top5 extends React.Component{
+ class Top5 extends React.Component{
     render(){
-        return  <div class="col-xs-7">
+        return  <div className="col-xs-7">
                     <h3>Top5</h3>
-                    <ul class="list-inline">
-                        <li><a href="#">手动阀手动阀</a> </li>
-                        <li><a href="#">手动阀手动阀</a> </li>
-                        <li><a href="#">手动阀手动阀</a> </li>
-                        <li><a href="#">手动阀手动阀</a> </li>
-                        <li><a href="#">手动阀手动阀</a> </li>
+                    <ul className="list-inline">
+                        <li><a href="#">yeah</a> </li>
+                        <li><a href="#">hi</a> </li>
+                        <li><a href="#">oh</a> </li>
+                        <li><a href="#">nice</a> </li>
+                        <li><a href="#">job</a> </li>
                     </ul>
                 </div>;
     }
 }
+export default Top5;

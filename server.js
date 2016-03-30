@@ -8,8 +8,13 @@ var mongoose = require('mongoose');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var comporession = require('compression');
+var swig = require("swig");
+var React = require("react");
+var ReactDOM = require("react-dom/server");
+var Router = require("react-router");
 
 var config = require('./config');
+var routes = require('./app/router');
 var categoryService = require('./contorller/categoryService');
 //var userService = require('./contorller/userService');
 var questionService = require('./contorller/questionService');
@@ -21,8 +26,9 @@ mongoose.connection.on('error',function(){
 
 var app = express();
 // view engine setup
-//app.set('views', path.join(__dirname, 'views'));
-//app.set('view engine', 'jade');
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'html');
+app.engine('html', swig.renderFile);
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -66,14 +72,31 @@ app.use(comporession())
 //  });
 //});
 
+//api service
 app.use('/api/category',categoryService);
 app.use('/api/question',questionService);
 //app.use('/api/user',userService);
-app.get('/',function(req,res){
-  res.send('hello world');
+
+//render html
+app.use(function(req,res){
+    Router.match({routes:routes.default,location:req.url},function(err,redirectLocation,renderProps){
+        if(err){
+            res.status(500).send(err.message);
+        }else if(redirectLocation){
+            res.status(302).redirect(redirectLocation.pathname + redirectLocation.search)
+        }else if(renderProps){
+            //server render
+            var html = ReactDOM.renderToString(React.createElement(Router.RoutingContext, renderProps));
+            var page = swig.renderFile('views/index.html', { html: html });
+            res.status(200).send(page);
+        } else {
+            res.status(404).send('Page Not Found')
+        }
+    });
 });
 
-app.listen(3000,function(){
+//listen port
+app.listen(app.get('port'),function(){
     console.log("start server...")
 });
 

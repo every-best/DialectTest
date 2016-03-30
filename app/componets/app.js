@@ -1,12 +1,13 @@
 import React from "react"
-import Nav from "./Nav"
+import Nav from "./nav"
 import Footer from "./Footer"
-export class App extends React.Component{
+class App extends React.Component{
     render(){
-        return (
-            <Nav/>
-                {this.props.children}
-            <Footer/>
-        );
+        return (<div>
+                    <Nav/>
+                        {this.props.children}
+                     <Footer/>
+                 </div>);
     }
 }
+export default App;
