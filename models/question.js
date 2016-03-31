@@ -1,8 +1,8 @@
-var mongoose = require('mongoose');
+import mongoose from 'mongoose'
+const {ObjectId} = mongoose.Schema.Types;
 
 var questionSchema = new mongoose.Schema({
-    quesionId:{type:String,index:true,unique:true},
-    category:{type:String,ref:"Category"},
+    category:{type:ObjectId,ref:"Category"},
     title:String,
     choose:[{type:String}],
     answer:String

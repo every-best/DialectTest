@@ -14,9 +14,10 @@ class Nav extends React.Component{
                         </div>
                         <div className="navbar-collapse collapse">
                             <ul className="nav navbar-nav navbar-right">
-                                <li><Link to="/About">About</Link></li>
-                                <li><Link to="/Category">Category</Link></li>
-                                <li><Link to="/User">User</Link></li>
+                                <li><Link to="/About">关于</Link></li>
+                                <li><Link to="/Category">方言</Link></li>
+                                <li><Link to="/AddCategory">加个方言</Link></li>
+                                <li><Link to="/User">炮哥</Link></li>
                             </ul>
                         </div>
                     </div>

@@ -13,32 +13,33 @@ Router.get("/list",function(req,res){
         if(err){
             res.state(500).end();
         }
-        res.send(categories);
+        res.send({code:200,result:categories});
     })
 });
 
 Router.post("/add",function(req,res){
     var category = {
-        name:req.query.title,
-        gradeText:[req.query.gradeA,req.query.gradeB,req.query.gradeC]
+        name:req.body.name,
+        desc:req.body.desc,
+        gradeText:[req.body.gradeA,req.body.gradeB,req.body.gradeC]
     };
     Category.create(category,function(err,category){
         if(err){
-            res.state(500).end();
+            res.send({code:500,err:err.message});
         }
-        res.send({code:200});
+        res.send({code:200,result:category});
     });
 });
 
 Router.post("/:cid/update",function(req,res){
     var cid = req.params.cid;
-    var categoryObj = {
-        name:req.query.name,
-        gradeText:[req.query.gradeA,req.query.gradeB,req.query.gradeC]
-    };
+    var categoryObj = new Category({
+        name:req.body.name,
+        gradeText:[req.body.gradeA,req.body.gradeB,req.body.gradeC]
+    });
     Category.findOneAndUpdate({categoryId:cid},categoryObj,null,function(err,category){
         if(err){
-            res.state(500).end();
+            res.status(500).send(err.message);
         }
         res.send({code:200});
     });
@@ -46,13 +47,9 @@ Router.post("/:cid/update",function(req,res){
 
 Router.post("/:cid/remove",function(req,res){
     var cid = req.params.cid;
-    var categoryObj = {
-        name:req.query.name,
-        gradeText:[req.query.gradeA,req.query.gradeB,req.query.gradeC]
-    };
     Category.findOneAndUpdate({categoryId:cid},categoryObj,null,function(err,category){
         if(err){
-            res.state(500).end();
+            res.status(500).send(err.message);
         }
         res.send({code:200});
     });

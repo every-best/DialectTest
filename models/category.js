@@ -1,8 +1,17 @@
-var mongoose = require('mongoose');
+import mongoose from 'mongoose'
+//var autoIncrement = require('mongoose-auto-increment');
+//autoIncrement.initialize(mongoose.connection);
 
 var categorySchema = new mongoose.Schema({
-    categoryId:{type:String,unique:true,index:true},
+    //categoryId:{type:String,require: true, unique: true},
     name:String,
+    desc:String,
     gradeText:[{type:String}]
 });
-module.exports = mongoose.model('Category', categorySchema);
+//categorySchema.plugin(autoIncrement.plugin, {
+//    model:'Category',
+//    fieldId:'categoryId',
+//    startAt:1000,
+//    incrementBy:1
+//});
+export default mongoose.model('Category', categorySchema);
