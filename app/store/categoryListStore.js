@@ -17,7 +17,22 @@ class CategoryListStore{
     onAddCategorySuccess(data){
         this.categories.push(data.result);
     }
-    addCategoryFail(jqXhr){
+    onAddCategoryFail(jqXhr){
+        toastr.error(jqXhr.responseJSON.message);
+    }
+
+    onRemoveCategorySuccess(data){
+        var nIndex = null;
+        this.categories.map((category,index) =>{
+            if(category._id == data.result._id){
+                nIndex = index;
+            }
+        });
+        if(nIndex != null){
+            this.categories.splice(nIndex,1);
+        }
+    }
+    onRemoveCategoryFail(jqXhr){
         toastr.error(jqXhr.responseJSON.message);
     }
 }

@@ -31,13 +31,13 @@ Router.post("/add",function(req,res){
     });
 });
 
-Router.post("/:cid/update",function(req,res){
-    var cid = req.params.cid;
+Router.post("/update",function(req,res){
+    var cid = req.query.cid;
     var categoryObj = new Category({
         name:req.body.name,
         gradeText:[req.body.gradeA,req.body.gradeB,req.body.gradeC]
     });
-    Category.findOneAndUpdate({categoryId:cid},categoryObj,null,function(err,category){
+    Category.findOneAndUpdate({categoryId:cid},null,function(err,category){
         if(err){
             res.status(500).send(err.message);
         }
@@ -45,13 +45,13 @@ Router.post("/:cid/update",function(req,res){
     });
 });
 
-Router.post("/:cid/remove",function(req,res){
-    var cid = req.params.cid;
-    Category.findOneAndUpdate({categoryId:cid},categoryObj,null,function(err,category){
+Router.post("/remove",function(req,res){
+    var cid = req.body.cid;
+    Category.remove({_id:cid},function(err,category){
         if(err){
             res.status(500).send(err.message);
         }
-        res.send({code:200});
+        res.send({code:200,result:{_id:cid}});
     });
 });
 module.exports = Router;

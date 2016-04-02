@@ -2,7 +2,7 @@ import Flux from "../Flux"
 
 class CategoryAction{
     constructor(){
-        this.generateActions('getCategoryListSuccess','getCategoryListFail','addCategorySuccess','addCategroyFail');
+        this.generateActions('getCategoryListSuccess','getCategoryListFail','addCategorySuccess','addCategroyFail','removeCategorySuccess','removeCategoryFail');
     }
 
     getCategory(){
@@ -23,6 +23,16 @@ class CategoryAction{
             }.bind(this))
             .fail((jqXhr) => {
                 this.actions.addCategroyFail(jqXhr);
+            });
+    }
+
+    removeCategory(oParams){
+        $.post("/api/category/remove",oParams)
+            .done(function(data){
+                this.actions.removeCategorySuccess(data);
+            }.bind(this))
+            .fail((jqXhr) => {
+                this.actions.removeCategroyFail(jqXhr);
             });
     }
 }

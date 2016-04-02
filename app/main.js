@@ -1,9 +1,9 @@
 import React from 'react';
 import Router from 'react-router';
 import ReactDOM from 'react-dom';
-import createBrowserHistory from 'history/lib/createBrowserHistory';
+import createHashHistory from 'history/lib/createHashHistory';
 import routes from './router';
 
-let history = createBrowserHistory();
+let history = createHashHistory();
 
 ReactDOM.render(<Router history={history}>{routes}</Router>, document.getElementById('APP'));

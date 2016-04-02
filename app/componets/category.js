@@ -5,13 +5,15 @@ import CategoryAction from '../action/CategoryAction';
 import AddCategory from './AddCategory';
 
 function CategoryItem(props){
-    var sUrl = "/"+props._id+"/category";
-    return (<div className="col-lg-3" key={props._id}>
+    var sCid = props._id;
+    var sUrl = "/"+sCid+"/category";
+    return (<div className="col-lg-3" key={sCid}>
                 <img src="" className="img-circle"/>
                 <h2>{props.name}</h2>
                 <p>{props.desc}</p>
                 <p>
                     <Link className="btn btn-default" to={sUrl} role="button">start >></Link>
+                    <a className="btn btn-default" onClick={this.deleteCategory.bind(this,sCid)}> delete</a>
                 </p>
             </div>);
 }
@@ -47,16 +49,21 @@ class Category extends React.Component{
     onChange(state) {
         this.setState(state);
     }
-
+    deleteCategory(cid){
+        const oParam = {
+            cid:cid
+        };
+        CategoryAction.removeCategory(oParam);
+    }
     render(){
         if(!this.state.categories){
             return null;
         }
         return (<section className="container">
                     <div className="row">
-                        {this.state.categories.map(CategoryItem)}
+                        {this.state.categories.map(CategoryItem.bind(this))}
                     </div>
-                    <AddCategory />
+                    <AddCategory/>
                 </section>
                 );
     }

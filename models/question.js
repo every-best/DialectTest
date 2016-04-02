@@ -7,4 +7,5 @@ var questionSchema = new mongoose.Schema({
     choose:[{type:String}],
     answer:String
 });
-module.exports = mongoose.model('Question', questionSchema);
+
+export default mongoose.model('Question', questionSchema);
