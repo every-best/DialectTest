@@ -6,7 +6,7 @@ import AddCategory from './AddCategory';
 
 function CategoryItem(props){
     var sCid = props._id;
-    var sUrl = "/"+sCid+"/category";
+    var sUrl = "/AddQuestion/"+sCid;
     return (<div className="col-lg-3" key={sCid}>
                 <img src="" className="img-circle"/>
                 <h2>{props.name}</h2>

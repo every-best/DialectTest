@@ -5,6 +5,7 @@ import About from './componets/About'
 import Index from './componets/Index'
 import Category from './componets/Category'
 import AddCategory from './componets/AddCategory'
+import AddQuestion from './componets/AddQuestion'
 import Question from './componets/Question'
 
 export default(
@@ -13,6 +14,7 @@ export default(
           <Route path='/About' component={About}/>
           <Route path='/Category' component={Category}/>
           <Route path="/AddCategory" component={AddCategory}/>
+          <Route path="/AddQuestion/:cid" component={AddQuestion}/>
           <Route path='/:category/question' component={Question}>
           </Route>
     </Route>

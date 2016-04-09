@@ -8,14 +8,13 @@ class AddQuestion extends React.Component{
     submit(){
         const oParams = {
             title:this.refs.title.value,
-            desc:this.refs.desc.value,
             chooseA:this.refs.chooseA.value,
             chooseB:this.refs.chooseB.value,
             chooseC:this.refs.chooseC.value,
             chooseD:this.refs.chooseD.value,
             answer:this.refs.answer.value,
         };
-        QuestionAction.addQuestion(oParams);
+        QuestionAction.addQuestion(this.props.params.cid,oParams);
     }
     //如果是es6开发方式，需要自己bind this
     render(){
@@ -32,12 +31,12 @@ class AddQuestion extends React.Component{
                 <input type="text" id="chooseC" name="chooseC" className="form-control" placeholder="选择C" required  ref="chooseC"/>
                 <label htmlFor="chooseD" className="sr-only">选择D</label>
                 <input type="text" id="chooseD" name="chooseD" className="form-control" placeholder="选择D" required  ref="chooseD"/>
-                <label htmlFor="chooseD" className="sr-only">答案</label>
-                <input type="text" id="chooseD" name="chooseD" className="form-control form-control-last" placeholder="答案" required  ref="chooseD"/>
+                <label htmlFor="answer" className="sr-only">答案</label>
+                <input type="text" id="answer" name="answer" className="form-control form-control-last" placeholder="答案" required  ref="answer"/>
                 <button className="btn btn-lg btn-primary btn-block" onClick={this.submit.bind(this)}>加个晒</button>
             </div>
         </section>);
     }
 }
 
-export default AddCategory;
+export default AddQuestion;

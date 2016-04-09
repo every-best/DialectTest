@@ -1,8 +1,8 @@
-import Flux from "./Flux"
+import Flux from "../Flux"
 
 class QuestionAction{
     constructor(){
-        this.generatorActions("getQuestionListSuccess","getQuestionListFail","addQuestionSuccess","addQuestionFail");
+        this.generateActions("getQuestionListSuccess","getQuestionListFail","addQuestionSuccess","addQuestionFail");
     }
 
     getQuestionList(oParams){
@@ -17,7 +17,7 @@ class QuestionAction{
     }
 
     addQuestion(cid,oParams){
-        let url = "/api/question/add/"+oParams.cid
+        let url = "/api/question/add/"+cid
         $.post(url,oParams)
         .done((data) => {
             this.actions.addQuestionSuccess(data);

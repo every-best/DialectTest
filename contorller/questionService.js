@@ -10,7 +10,7 @@ Router.use(function(req,res,next){
 });
 
 Router.get("/list/:cid",function(req,res){
-    const {cid} = req.params.cid;
+    const {cid} = req.params;
     function filter(questions){
         return questions.map(function(question){
                     const {title,choose}= question;
@@ -36,7 +36,8 @@ Router.get("/list/:cid",function(req,res){
 });
 
 Router.post("/add/:cid",function(req,res){
-    const {cid} = req.params.cid;
+    const {cid} = req.params;
+    console.log(cid);
     Category.findOne({_id:cid},function(err,category){
         if(err){
             res.status(500).end();
@@ -54,6 +55,8 @@ Router.post("/add/:cid",function(req,res){
                 }
                 res.send({code:200});
             });
+        }else{
+            res.send({code:204,msg:"no category."});
         }
     });
 })
