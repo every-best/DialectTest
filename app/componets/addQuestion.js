@@ -6,15 +6,17 @@ class AddQuestion extends React.Component{
         super(props);
     }
     submit(){
-        const oParams = {
-            title:this.refs.title.value,
-            chooseA:this.refs.chooseA.value,
-            chooseB:this.refs.chooseB.value,
-            chooseC:this.refs.chooseC.value,
-            chooseD:this.refs.chooseD.value,
-            answer:this.refs.answer.value,
-        };
-        QuestionAction.addQuestion(this.props.params.cid,oParams);
+        if(this.refs.title.value != null){
+            const oParams = {
+                title:this.refs.title.value,
+                chooseA:this.refs.chooseA.value,
+                chooseB:this.refs.chooseB.value,
+                chooseC:this.refs.chooseC.value,
+                chooseD:this.refs.chooseD.value,
+                answer:this.refs.answer.value,
+            };
+            QuestionAction.addQuestion(this.props.params.cid,oParams);
+        }
     }
     //如果是es6开发方式，需要自己bind this
     render(){

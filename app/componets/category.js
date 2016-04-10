@@ -7,13 +7,15 @@ import AddCategory from './AddCategory';
 function CategoryItem(props){
     var sCid = props._id;
     var sUrl = "/Question/"+sCid;
+    var sUrl2 = "/AddQuestion/"+sCid;
     return (<div className="col-lg-3" key={sCid}>
                 <img src="" className="img-circle"/>
                 <h2>{props.name}</h2>
                 <p>{props.desc}</p>
                 <p>
                     <Link className="btn btn-default" to={sUrl} role="button">start >></Link>
-                    <a className="btn btn-default" onClick={this.deleteCategory.bind(this,sCid)}> delete</a>
+                    <Link className="btn btn-default" to={sUrl2} role="button">add >></Link>
+                    <a className="btn btn-default" onClick={this.deleteCategory.bind(this,sCid)}> delete >></a>
                 </p>
             </div>);
 }
