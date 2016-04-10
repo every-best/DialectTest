@@ -6,7 +6,8 @@ import Index from './componets/Index'
 import Category from './componets/Category'
 import AddCategory from './componets/AddCategory'
 import AddQuestion from './componets/AddQuestion'
-import Question from './componets/Question'
+import QuestionList from './componets/QuestionList'
+import Result from './componets/Result'
 
 export default(
     <Route component={App}>
@@ -15,7 +16,7 @@ export default(
           <Route path='/Category' component={Category}/>
           <Route path="/AddCategory" component={AddCategory}/>
           <Route path="/AddQuestion/:cid" component={AddQuestion}/>
-          <Route path='/:category/question' component={Question}>
-          </Route>
+          <Route path="/Result/:cid" component={Result}/>
+          <Route path='/Question/:cid' component={QuestionList} />
     </Route>
 );

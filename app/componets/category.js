@@ -6,7 +6,7 @@ import AddCategory from './AddCategory';
 
 function CategoryItem(props){
     var sCid = props._id;
-    var sUrl = "/AddQuestion/"+sCid;
+    var sUrl = "/Question/"+sCid;
     return (<div className="col-lg-3" key={sCid}>
                 <img src="" className="img-circle"/>
                 <h2>{props.name}</h2>
@@ -18,20 +18,6 @@ function CategoryItem(props){
             </div>);
 }
 class Category extends React.Component{
-    //constructor(props){
-    //    super(props);
-    //    this.state = { categories:[]};
-    //}
-    //getData(){
-    //    $.get("/api/category/list",function(result){
-    //        if(result.code == 200){
-    //            this.setState({categories:result.result});
-    //        }
-    //    }.bind(this));
-    //}
-    //componentDidMount(){
-    //    this.getData();
-    //}
     constructor(props){
         super(props);
         this.state = CategoryListStore.getState();

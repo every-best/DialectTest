@@ -2,11 +2,11 @@ import Flux from "../Flux"
 
 class QuestionAction{
     constructor(){
-        this.generateActions("getQuestionListSuccess","getQuestionListFail","addQuestionSuccess","addQuestionFail");
+        this.generateActions("getQuestionListSuccess","getQuestionListFail","getQuestionAnswerSuccess","getQuestionAnswerFail","addQuestionSuccess","addQuestionFail");
     }
 
-    getQuestionList(oParams){
-        let url = "/api/question/list/"+oParams.cid
+    getQuestionList(cid){
+        let url = "/api/question/list/"+cid
         $.get(url)
             .done((data) => {
                 this.actions.getQuestionListSuccess(data);
@@ -25,6 +25,19 @@ class QuestionAction{
         .fail((jqXhr) => {
             this.actions.addQuestionFail(jqXhr);
         })
+    }
+
+    getQuestionAnswer(qid,answer,oParams){
+        let url = "/api/question/getAnswer/"+qid;
+        var oParams = oParams || {};
+        oParams.answer = answer;
+        $.post(url,oParams)
+        .done((data) =>{
+                this.actions.getQuestionAnswerSuccess(data);
+            })
+        .fail((jqXhr) => {
+                this.actions.getQuestionAnswerFail(jqXhr);
+            });
     }
 
 }

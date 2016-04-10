@@ -4,13 +4,22 @@ import QuestionAction from "../action/QuestionAction"
 class QuestionListStore{
     constructor(){
         this.bindActions(QuestionAction);
-        this.questions = []
+        this.questions = [];
+        this.answerResults = [];
     }
 
     onGetQuestionListSuccess(data){
         this.questions = data.result;
+        this.answerResults = [];
     }
     onGetQuestionListFail(jqXhr){
+        toastr.error(jqXhr.responseJSON.message);
+    }
+
+    onGetQuestionAnswerSuccess(data){
+        this.answerResults.push(data.result);
+    }
+    onGetQuestionAnswerFail(jqXhr){
         toastr.error(jqXhr.responseJSON.message);
     }
 

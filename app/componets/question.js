@@ -1,36 +1,84 @@
 import React from "react"
+import classNames from 'classnames'
+function Progress(answerResults,total){
+    var aCount = [],aHtml = [];
+    var preIsRight = null,count=0;
+    answerResults.forEach((answer,nIndex)=>{
+        if(preIsRight === null){
+            preIsRight = answer.isRight;
+        }
+        if(preIsRight != answer.isRight){
+            aCount.push({
+                isRight:preIsRight,
+                count:count
+            });
+            count = 1;
+        }else{
+            count++;
+        }
+        preIsRight = answer.isRight;
+    });
+    aCount.push({
+        isRight:preIsRight,
+        count:count
+    });
+    aCount.forEach((oCount,nIndex) =>{
+        var sHtml = null;
+        var classname = classNames({
+            "progress-bar":true,
+            "progress-bar-success":oCount.isRight,
+            "progress-bar-danger":!oCount.isRight
+        });
+        var sWidth = ((oCount.count+0.0)/total)*100+"%";
+        var sText = oCount.count+(oCount.isRight?"正确":"错误");
+        sHtml = (<div className={classname} style={{"width":sWidth}} key={nIndex}>
+            <span className="sr-only">{sText}</span>
+        </div>);
+        aHtml.push(sHtml);
+    });
 
-function Progress(props){
-    return (<div class="progress">
-                <div class="progress-bar progress-bar-success" style="width: 35%">
-                    <span class="sr-only">35% Complete (success)</span>
-                </div>
-                <div class="progress-bar progress-bar-danger" style="width: 10%">
-                    <span class="sr-only">10% Complete (danger)</span>
-                </div>
-            </div>);
-}
-
-function ChooseItem(props,nIndex){
-    //list-group-item-success list-group-item-dange
-    return (<button type="button"  class="list-group-item" onClick={this.choose}>
-                {nIndex+1}.{props.text}
-            </button>);
-}
-class Question extends React.Component{
-
-    choose(evt){
-        //TODO 选择操作
+    if(aHtml.length>0){
+        return (<div className="progress">
+                    {aHtml}
+                </div>);
+    }else{
+        return null;
     }
+}
+
+
+class Question extends React.Component{
+    constructor(props){
+        super(props);
+        this._convertEnmu = {
+          0:'A',
+            1:'B',
+            2:'C',
+            3:'D'
+        };
+    }
+
+    convertAnswer(nIndex){
+        return this._convertEnmu[nIndex];
+    }
+
+    choose(index){
+        const{question,onChoose} = this.props;
+        onChoose(question._id,this.convertAnswer(index));
+    }
+
     render(){
+        const {onChoose,answerResults,question,total} = this.props;
         return (<section className="container">
-                    <div className="progress">
-                        {Progress(props)}
-                    </div>
+                    {Progress(answerResults,total)}
                     <div className="testContainer">
-                        <h2 className="page-header"> {this.props.title}</h2>
+                        <h2 className="page-header"> {question.title}</h2>
                         <div className="list-group">
-                            {this.props.chooses.map(ChooseItem)}
+                            {question.choose.map((chooseItem,nIndex)=>{
+                                return <button type="button"  className="list-group-item" onClick={this.choose.bind(this,nIndex)} key = {nIndex}>
+                                            {this.convertAnswer(nIndex)}.{chooseItem}
+                                        </button>;
+                            })}
                         </div>
                     </div>
                 </section>);

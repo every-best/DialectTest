@@ -54,4 +54,37 @@ Router.post("/remove",function(req,res){
         res.send({code:200,result:{_id:cid}});
     });
 });
+
+Router.post("/getResult/:cid",function(req,res){
+   var answerResult = req.body.answers.split(",");
+    if(!answerResult){
+        res.send({code:204,err:"parameter error..."});
+    }
+   var rightAnswer = answerResult.filter((answer)=>{
+       return answer.isRight;
+   });
+    var nRatio = (rightAnswer.length+0.0) / answerResult.length,nIndex;
+    if(nRatio < 0.59){
+        nIndex = 0;
+    }else if(nRatio < 0.79){
+        nIndex = 1;
+    }else{
+        nIndex = 2;
+    }
+    Category.findOne({_id:req.params.cid},function(err,category){
+        if(err){
+            res.send({code:500,err:err.message});
+        }
+        if(category){
+            res.send({code:200,result:{
+                grade:category.gradeText[nIndex],
+                name:category.name,
+                desc:category.desc,
+                cid:category._id
+            }});
+        }else{
+            res.send({code:500,err:"no category..."});
+        }
+    });
+});
 module.exports = Router;

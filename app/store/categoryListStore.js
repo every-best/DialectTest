@@ -4,7 +4,8 @@ import CategoryAction from "../action/CategoryAction"
 class CategoryListStore{
     constructor(){
         this.bindActions(CategoryAction);
-        this.categories = []
+        this.categories = [];
+        this.resultInfo = {};
     }
 
     onGetCategoryListSuccess(data){
@@ -33,6 +34,14 @@ class CategoryListStore{
         }
     }
     onRemoveCategoryFail(jqXhr){
+        toastr.error(jqXhr.responseJSON.message);
+    }
+
+    onGetResultSuccess(data){
+        this.resultInfo = data.result;
+    }
+
+    onGetResultFail(jqXhr){
         toastr.error(jqXhr.responseJSON.message);
     }
 }
