@@ -1,4 +1,4 @@
-import Flux from "../Flux"
+import Flux from "../flux"
 
 class QuestionAction{
     constructor(){

@@ -1,4 +1,4 @@
-import Flux from "../Flux"
+import Flux from "../flux"
 import CategoryAction from "../action/categoryAction"
 
 class CategoryListStore{
