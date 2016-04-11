@@ -1,7 +1,7 @@
 import React from "react"
 import {Link} from 'react-router'
-import CategoryListStore from '../store/CategoryListStore';
-import CategoryAction from '../action/CategoryAction';
+import CategoryListStore from '../store/categoryListStore';
+import CategoryAction from '../action/categoryAction';
 import connectToStores from 'alt-utils/lib/connectToStores'
 
 class Result extends React.Component{

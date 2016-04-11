@@ -1,5 +1,5 @@
 import Flux from "../Flux"
-import CategoryAction from "../action/CategoryAction"
+import CategoryAction from "../action/categoryAction"
 
 class CategoryListStore{
     constructor(){

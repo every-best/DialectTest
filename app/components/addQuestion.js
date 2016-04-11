@@ -1,5 +1,5 @@
 import React from "react"
-import QuestionAction from '../action/QuestionAction';
+import QuestionAction from '../action/questionAction';
 
 class AddQuestion extends React.Component{
     constructor(props){

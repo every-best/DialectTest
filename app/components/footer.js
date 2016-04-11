@@ -1,5 +1,5 @@
 import React from "react"
-import Top5 from "./Top5"
+import Top5 from "./top5"
 class Footer extends React.Component{
     render(){
         return (<footer>

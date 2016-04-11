@@ -1,5 +1,5 @@
 import Flux from "../Flux"
-import QuestionAction from "../action/QuestionAction"
+import QuestionAction from "../action/questionAction"
 
 class QuestionListStore{
     constructor(){

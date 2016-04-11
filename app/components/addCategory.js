@@ -1,6 +1,6 @@
 import React from "react"
-import CategoryListStore from '../store/CategoryListStore';
-import CategoryAction from '../action/CategoryAction';
+import CategoryListStore from '../store/categoryListStore';
+import CategoryAction from '../action/categoryAction';
 
 class AddCategory extends React.Component{
     constructor(props){

@@ -1,8 +1,8 @@
 import React from "react"
 import {Link} from "react-router"
-import CategoryListStore from '../store/CategoryListStore';
-import CategoryAction from '../action/CategoryAction';
-import AddCategory from './AddCategory';
+import CategoryListStore from '../store/categoryListStore';
+import CategoryAction from '../action/categoryAction';
+import AddCategory from './addCategory';
 
 function CategoryItem(props){
     var sCid = props._id;

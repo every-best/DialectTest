@@ -1,6 +1,6 @@
 import express from "express"
-import Category from "./../models/Category"
-import Question from "./../models/Question"
+import Category from "./../models/category"
+import Question from "./../models/question"
 import RandomM from  "./../util/randomM"
 
 const Router = express.Router();

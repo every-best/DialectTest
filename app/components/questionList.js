@@ -1,5 +1,5 @@
 import React from 'react'
-import Question from './Question'
+import Question from './question'
 import QuestionListStore from '../store/QuestionListStore'
 import QuestionAction from '../action/QuestionAction'
 import connectToStores from 'alt-utils/lib/connectToStores'

@@ -1,13 +1,13 @@
 import React from 'react'
 import {Route} from 'react-router'
-import App from './components/App'
-import About from './components/About'
-import Index from './components/Index'
-import Category from './components/Category'
-import AddCategory from './components/AddCategory'
-import AddQuestion from './components/AddQuestion'
-import QuestionList from './components/QuestionList'
-import Result from './components/Result'
+import App from './components/app'
+import About from './components/about'
+import Index from './components/index'
+import Category from './components/category'
+import AddCategory from './components/addCategory'
+import AddQuestion from './components/addQuestion'
+import QuestionList from './components/questionList'
+import Result from './components/result'
 
 export default(
     <Route component={App}>
