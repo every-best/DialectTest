@@ -1,7 +1,7 @@
 import React from 'react'
 import Question from './question'
-import QuestionListStore from '../store/QuestionListStore'
-import QuestionAction from '../action/QuestionAction'
+import QuestionListStore from '../store/questionListStore'
+import QuestionAction from '../action/questionAction'
 import connectToStores from 'alt-utils/lib/connectToStores'
 
 class QuestionList extends React.Component{
