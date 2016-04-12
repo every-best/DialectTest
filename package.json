@@ -22,7 +22,6 @@
   "dependencies": {
     "alt": "^0.17.8",
     "alt-utils": "^1.0.0",
-    "babel-polyfill": "^6.7.4",
     "body-parser": "~1.13.2",
     "classnames": "^2.2.3",
     "compression": "^1.6.0",
