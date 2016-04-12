@@ -32,7 +32,6 @@ function getYueYuQuestion(sUrl){
             if(sRegEx.test(res.text)){
                 oParam["answer"] = RegExp.$1;
             }
-            console.info(oParam);
          if(oParam["answer"]){
              superagent.post("http://localhost:3000/api/question/add/57090af52c8a5e401694dafe")
              .send(oParam)

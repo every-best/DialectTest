@@ -46,6 +46,27 @@ function Progress(answerResults,total){
     }
 }
 
+function htmlEntinties(str){
+    if(arguments.length === 0){
+        return '';
+    }
+    var oReCodeChars = {
+        '&':'amp',
+        '<':'lt',
+        '>':'gt',
+        '"':'quot',
+        ' ':'nbsp',
+    };
+
+
+    return str.replace(/[<>&" ]/g,function(sMatch){
+       return '&'+ oReCodeChars[sMatch] + ';' ;
+    });
+}
+
+function dangerouseHtml(str){
+    return {__html:str};
+}
 
 class Question extends React.Component{
     constructor(props){
@@ -57,7 +78,9 @@ class Question extends React.Component{
             3:'D'
         };
     }
-
+    rawMarkup(){
+        return {__html:this.props.question.title.replace("https","http")};
+    }
     convertAnswer(nIndex){
         return this._convertEnmu[nIndex];
     }
@@ -72,7 +95,7 @@ class Question extends React.Component{
         return (<section className="container">
                     {Progress(answerResults,total)}
                     <div className="testContainer">
-                        <h2 className="page-header"> {question.title}</h2>
+                        <h2 className="page-header" dangerouslySetInnerHTML={this.rawMarkup()}></h2>
                         <div className="list-group">
                             {question.choose.map((chooseItem,nIndex)=>{
                                 return <button type="button"  className="list-group-item" onClick={this.choose.bind(this,nIndex)} key = {nIndex}>

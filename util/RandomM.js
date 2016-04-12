@@ -1,6 +1,6 @@
 //origAry 里面 随机选取 nNumber 个数字 sdf
 module.exports = function(aOrigAry,n){
-    if(n > origAry.length){
+    if(n > aOrigAry.length){
         return null;
     }
     var aRandData = [];
@@ -12,5 +12,6 @@ module.exports = function(aOrigAry,n){
             aRandData[nRepleaceIndex] = oData;
         }
     });
+    console.log(aRandData);
     return aRandData;
 };

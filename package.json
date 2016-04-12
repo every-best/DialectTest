@@ -22,6 +22,7 @@
   "dependencies": {
     "alt": "^0.17.8",
     "alt-utils": "^1.0.0",
+    "babel-polyfill": "^6.7.4",
     "body-parser": "~1.13.2",
     "classnames": "^2.2.3",
     "compression": "^1.6.0",
@@ -31,6 +32,7 @@
     "mongoose": "^4.2.5",
     "mongoose-auto-increment": "^5.0.1",
     "morgan": "~1.6.1",
+    "q": "^1.4.1",
     "react": "^0.14.2",
     "react-dom": "^0.14.2",
     "react-router": "^1.0.0",

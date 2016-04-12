@@ -28,7 +28,8 @@ Router.get("/list/:cid",function(req,res){
             }
             if(questionList.length>10){
                 //随机挑选10个
-                res.send({code:200,result:filter(RandomM(questionList))});
+                var sNewQuestionList = RandomM(questionList,10);
+                res.send({code:200,result:filter(sNewQuestionList)});
             }else{
                 res.send({code:200,result:filter(questionList)});
             }
