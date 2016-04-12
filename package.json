@@ -9,7 +9,6 @@
   "scripts": {
     "start": "node server.js",
     "watch": "nodemon server.js",
-    "postinstall": "bower install --allow-root&& gulp build",
     "build": "webpack --progress --profile --colors --watch --debug"
   },
   "main": "app.js",
