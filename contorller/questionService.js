@@ -1,7 +1,7 @@
 import express from "express"
 import Category from "./../models/category"
 import Question from "./../models/question"
-import RandomM from  "./../util/randomM"
+import RandomM from  "./../util/RandomM"
 
 const Router = express.Router();
 
