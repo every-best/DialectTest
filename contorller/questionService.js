@@ -70,7 +70,10 @@ Router.post("/getAnswer/:qid",function(req,res){
 });
 
 Router.post("/add/:cid",function(req,res){
-    const {cid} = req.params;
+    const {cid,uid,pwd} = req.params;
+    if(uid != "yzzhan" || pwd != "123456"){
+        res.send({code:208,msg:"auth error"});
+    }
     console.log(cid);
     Category.findOne({_id:cid},function(err,category){
         if(err){

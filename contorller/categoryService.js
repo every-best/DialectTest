@@ -18,11 +18,15 @@ Router.get("/list",function(req,res){
 });
 
 Router.post("/add",function(req,res){
+    const{name,desc,gradeA,gradeB,gradeC,uid,pwd} = req.body;
     var category = {
-        name:req.body.name,
-        desc:req.body.desc,
-        gradeText:[req.body.gradeA,req.body.gradeB,req.body.gradeC]
+        name:name,
+        desc:desc,
+        gradeText:[gradeA,gradeB,gradeC]
     };
+    if(uid != "yzzhan" || pwd != "123456"){
+        res.send({code:208,msg:"auth error"});
+    }
     Category.create(category,function(err,category){
         if(err){
             res.send({code:500,err:err.message});
@@ -46,7 +50,10 @@ Router.post("/update",function(req,res){
 });
 
 Router.post("/remove",function(req,res){
-    var cid = req.body.cid;
+    const {cid,uid,pwd} = req.body;
+    if(uid != "yzzhan" || pwd != "123456"){
+        res.send({code:208,msg:"auth error"});
+    }
     Category.remove({_id:cid},function(err,category){
         if(err){
             res.status(500).send(err.message);

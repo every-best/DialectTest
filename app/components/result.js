@@ -33,7 +33,7 @@ class Result extends React.Component{
                 <div className="jumbotron resultContainer">
                     <h1>{grade}</h1>
                     <p>{desc}</p>
-                    <p><Link className="btn btn-primary btn-lg" to = {sUrl} role="button">再试一次</Link></p>
+                    <p style={{textAlign:"center"}}><Link className="btn btn-primary btn-lg" to = {sUrl} role="button">再试一次</Link></p>
                 </div>
             </section>;
         }else{
