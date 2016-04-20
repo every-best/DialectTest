@@ -67,8 +67,9 @@ Router.post("/getResult/:cid",function(req,res){
     if(!answerResult){
         res.send({code:204,err:"parameter error..."});
     }
-   var rightAnswer = answerResult.filter((answer)=>{
-       return answer;
+   var rightAnswer = [];
+    answerResult.forEach((answer,index)=>{
+      answer && rightAnswer.push(index);
    });
     var nRatio = (rightAnswer.length+0.0) / answerResult.length,nIndex;
     if(nRatio < 0.69){
