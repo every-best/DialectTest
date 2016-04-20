@@ -99,9 +99,9 @@ class Question extends React.Component{
                         <h2 className="page-header" dangerouslySetInnerHTML={this.rawMarkup()}></h2>
                         <div className="list-group">
                             {question.choose.map((chooseItem,nIndex)=>{
-                                return <button type="button"  className="list-group-item" onClick={this.choose.bind(this,nIndex)} key = {nIndex}>
+                                return <a className="list-group-item" onClick={this.choose.bind(this,nIndex)} key = {nIndex}>
                                             {this.convertAnswer(nIndex)}.{chooseItem}
-                                        </button>;
+                                        </a>;
                             })}
                         </div>
                     </div>
