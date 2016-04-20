@@ -22,7 +22,7 @@ class QuestionList extends React.Component{
     componentDidMount(){
         QuestionAction.getQuestionList(this._cid);
     }
-    componentDidUnmount(){
+    componentWillUnmount(){
         this.setState({currentIndex:0});
     }
     onChoose(qid,answer){

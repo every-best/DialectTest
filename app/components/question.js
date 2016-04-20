@@ -87,6 +87,7 @@ class Question extends React.Component{
 
     choose(index){
         const{question,onChoose} = this.props;
+        $("h2.page-header").focus();
         onChoose(question._id,this.convertAnswer(index));
     }
 

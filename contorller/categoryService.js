@@ -71,9 +71,9 @@ Router.post("/getResult/:cid",function(req,res){
        return answer;
    });
     var nRatio = (rightAnswer.length+0.0) / answerResult.length,nIndex;
-    if(nRatio < 0.59){
+    if(nRatio < 0.69){
         nIndex = 0;
-    }else if(nRatio < 0.79){
+    }else if(nRatio < 0.9){
         nIndex = 1;
     }else{
         nIndex = 2;
