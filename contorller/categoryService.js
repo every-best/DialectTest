@@ -78,6 +78,7 @@ Router.post("/getResult/:cid",function(req,res){
     }else{
         nIndex = 2;
     }
+    console.log(rightAnswer+"||||"+answerResult+"||||"+nIndex);
     Category.findOne({_id:req.params.cid},function(err,category){
         if(err){
             res.send({code:500,err:err.message});
