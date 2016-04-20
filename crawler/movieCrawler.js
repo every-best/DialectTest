@@ -6,11 +6,12 @@ var fs = require("fs");
 var Q = require("q");
 var cid = process.argv[2] || '570ca73555c4946b86c9a85b';
 
-function getMovieQuestion(){
-    var sUrl = "https://movie.douban.com/top250";
+function getMovieQuestion(sUrl){
+    var sUrl = sUrl || "https://movie.douban.com/top250";
     superagent.get(sUrl)
+        .set("User-Agent","Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.112 Safari/537.36")
     .charset("utf-8")
-    .end(function(err,res){
+       .end(function(err,res){
         if(err){
             console.error(err);
             return;
@@ -20,7 +21,7 @@ function getMovieQuestion(){
         movieLinks.each(function(nIndex,movieLink){
             var sMoviewUrl = $(movieLink).attr("href");
             if(sMoviewUrl.startsWith("/")){
-                sMoviewUrl = "https://movie.douban.com"+sMoviewUrl;
+                sMoviewUrl = "http://movie.douban.com"+sMoviewUrl;
             }
             getQuestionItem(sMoviewUrl);
         })
@@ -37,6 +38,7 @@ var sEmnu = {
 
 function getQuestionItem(sUrl){
     superagent.get(sUrl)
+        .set("User-Agent","Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.112 Safari/537.36")
         .charset("utf-8")
     .end(function(err,res){
         if(err){
@@ -70,7 +72,9 @@ function getQuestionItem(sUrl){
                         var $ = cheerio.load(res.text);
                         var sImageUrl = $($("#content .article .photo-show .photo-wp .mainphoto img")[0]).attr("src");
                         var sPath = '/images/movie/'+new Date().getTime()+'.jpg';
-                        downloadImage('/public'+sPath,sImageUrl);
+                        setTimeout(function(){
+                            downloadImage('/public'+sPath,sImageUrl);
+                        },2000);
                         var sTitle = "<img src='"+sPath+"'/>";
                         defer.resolve(sTitle);
                     });
@@ -135,13 +139,12 @@ function getQuestionItem(sUrl){
             }
             oParam.answer = sEmnu[answerIndex];
 
-            superagent.post("http://localhost:3000/api/question/add/"+cid)
+            superagent.post("http://webmail.danding.org:8003/api/question/add/"+cid)
                 .send(oParam)
                 .end(function(err,res){
                     if(err){
                         console.error(err);
                     }
-                    console.info(res.text);
                 })
         });
     });
@@ -149,12 +152,23 @@ function getQuestionItem(sUrl){
 
 function downloadImage(sPath,sUrl){
     superagent.get(sUrl)
-    .end(function(err, res) {
+        .set("User-Agent","Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.112 Safari/537.36")
+        .end(function(err, res) {
         fs.writeFileSync(process.cwd()+sPath, res.body);
-        console.log('end!', res)
+        console.log('end!', sUrl)
     })
 }
 
 //getQuestionItem("https://movie.douban.com/subject/1292052/");
-getMovieQuestion();
+var count = 0;
+var sInterval = setInterval(function(){
+    if(count <= 9 ){
+        var sUrl = "https://movie.douban.com/top250?start="+25*count;
+        getMovieQuestion(sUrl);
+        count++;
+    }else{
+        clearInterval(sInterval);
+    }
+},10000);
+//getMovieQuestion("https://movie.douban.com/top250");
 //downloadImage("http://img3.doubanio.com/view/photo/photo/public/p507024461.jpg");

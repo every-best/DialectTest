@@ -24,9 +24,9 @@ Router.post("/add",function(req,res){
         desc:desc,
         gradeText:[gradeA,gradeB,gradeC]
     };
-    if(uid != "yzzhan" || pwd != "123456"){
-        res.send({code:208,msg:"auth error"});
-    }
+    //if(uid != "yzzhan" || pwd != "123456"){
+    //    res.send({code:208,msg:"auth error"});
+    //}
     Category.create(category,function(err,category){
         if(err){
             res.send({code:500,err:err.message});
@@ -51,9 +51,9 @@ Router.post("/update",function(req,res){
 
 Router.post("/remove",function(req,res){
     const {cid,uid,pwd} = req.body;
-    if(uid != "yzzhan" || pwd != "123456"){
-        res.send({code:208,msg:"auth error"});
-    }
+    //if(uid != "yzzhan" || pwd != "123456"){
+    //    res.send({code:208,msg:"auth error"});
+    //}
     Category.remove({_id:cid},function(err,category){
         if(err){
             res.status(500).send(err.message);
@@ -68,12 +68,12 @@ Router.post("/getResult/:cid",function(req,res){
         res.send({code:204,err:"parameter error..."});
     }
    var rightAnswer = answerResult.filter((answer)=>{
-       return answer;
+       return answer === "true";
    });
     var nRatio = (rightAnswer.length+0.0) / answerResult.length,nIndex;
-    if(nRatio < 0.59){
+    if(nRatio < 0.69){
         nIndex = 0;
-    }else if(nRatio < 0.79){
+    }else if(nRatio < 0.9){
         nIndex = 1;
     }else{
         nIndex = 2;

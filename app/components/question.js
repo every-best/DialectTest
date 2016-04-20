@@ -87,6 +87,7 @@ class Question extends React.Component{
 
     choose(index){
         const{question,onChoose} = this.props;
+        $("h2.page-header").click();
         onChoose(question._id,this.convertAnswer(index));
     }
 
@@ -98,9 +99,10 @@ class Question extends React.Component{
                         <h2 className="page-header" dangerouslySetInnerHTML={this.rawMarkup()}></h2>
                         <div className="list-group">
                             {question.choose.map((chooseItem,nIndex)=>{
-                                return <button type="button"  className="list-group-item" onClick={this.choose.bind(this,nIndex)} key = {nIndex}>
-                                            {this.convertAnswer(nIndex)}.{chooseItem}
-                                        </button>;
+                                const chooseText = this.convertAnswer(nIndex)+"."+chooseItem;
+                                return <a className="list-group-item" onClick={this.choose.bind(this,nIndex)} key = {nIndex}>
+                                            {chooseText}
+                                        </a>;
                             })}
                         </div>
                     </div>
