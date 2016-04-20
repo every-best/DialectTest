@@ -42,8 +42,11 @@ class QuestionList extends React.Component{
 
     render(){
         const {questions,answerResults} = this.props;
-        let total = questions.length;
-        if(questions && questions.length>0 && this.state.currentIndex < total){
+
+        let {length:total} = questions;
+
+        if(questions && total>0 && this.state.currentIndex < total){
+
             let question = questions[this.state.currentIndex];
             return (<Question question={question} answerResults={answerResults} total={total} onChoose={this.onChoose.bind(this)}/>);
         }else if(questions.length == 0){

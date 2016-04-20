@@ -1,4 +1,7 @@
 //origAry 里面 随机选取 nNumber 个数字 sdf
+
+// m个数据里面选出 n个不重复的数据值
+
 module.exports = function(aOrigAry,n){
     if(n > aOrigAry.length){
         return null;

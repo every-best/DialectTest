@@ -73,7 +73,7 @@ app.use(comporession())
 //  });
 //});
 
-//api service
+//api service Router
 app.use('/api/category',categoryService);
 app.use('/api/question',questionService);
 //app.use('/api/user',userService);

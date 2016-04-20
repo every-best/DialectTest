@@ -6,11 +6,11 @@ var fs = require("fs");
 var Q = require("q");
 var cid = process.argv[2] || '570ca73555c4946b86c9a85b';
 
-function getMovieQuestion(){
-    var sUrl = "https://movie.douban.com/top250";
+function getMovieQuestion(sUrl){
+    var sUrl = sUrl || "https://movie.douban.com/top250";
     superagent.get(sUrl)
     .charset("utf-8")
-    .end(function(err,res){
+       .end(function(err,res){
         if(err){
             console.error(err);
             return;
@@ -20,7 +20,7 @@ function getMovieQuestion(){
         movieLinks.each(function(nIndex,movieLink){
             var sMoviewUrl = $(movieLink).attr("href");
             if(sMoviewUrl.startsWith("/")){
-                sMoviewUrl = "https://movie.douban.com"+sMoviewUrl;
+                sMoviewUrl = "http://movie.douban.com"+sMoviewUrl;
             }
             getQuestionItem(sMoviewUrl);
         })
@@ -135,13 +135,12 @@ function getQuestionItem(sUrl){
             }
             oParam.answer = sEmnu[answerIndex];
 
-            superagent.post("http://localhost:3000/api/question/add/"+cid)
+            superagent.post("http://webmail.danding.org:8003/api/question/add/"+cid)
                 .send(oParam)
                 .end(function(err,res){
                     if(err){
                         console.error(err);
                     }
-                    console.info(res.text);
                 })
         });
     });
@@ -149,12 +148,22 @@ function getQuestionItem(sUrl){
 
 function downloadImage(sPath,sUrl){
     superagent.get(sUrl)
-    .end(function(err, res) {
+        .end(function(err, res) {
         fs.writeFileSync(process.cwd()+sPath, res.body);
-        console.log('end!', res)
+        console.log('end!', sUrl)
     })
 }
 
 //getQuestionItem("https://movie.douban.com/subject/1292052/");
-getMovieQuestion();
+var count = 0;
+var sInterval = setInterval(function(){
+    if(count <= 9 ){
+        var sUrl = "https://movie.douban.com/top250?start="+25*count;
+        getMovieQuestion();
+        count++;
+    }else{
+        clearInterval(sInterval);
+    }
+},3000);
+//getMovieQuestion("https://movie.douban.com/top250");
 //downloadImage("http://img3.doubanio.com/view/photo/photo/public/p507024461.jpg");
